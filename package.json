@@ -29,7 +29,8 @@
     "eject": "react-scripts eject",
     "server": "node server/index.js",
     "dev": "concurrently \"npm start\" \"npm run server\"",
-    "production": "NODE_ENV=production node server/index.js"
+    "production": "NODE_ENV=production node server/index.js",
+    "render-build": "npm install && npm run build"
   },
   "engines": {
     "node": ">=18.0.0"
