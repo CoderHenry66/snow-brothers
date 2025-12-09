@@ -191,8 +191,13 @@ app.get('/api/health', (req, res) => {
 
 // 生产环境：所有其他请求返回 index.html (SPA)
 if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build', 'index.html'));
+  app.use((req, res, next) => {
+    // 如果不是 API 请求且不是 socket.io，返回 index.html
+    if (!req.path.startsWith('/api') && !req.path.startsWith('/socket.io')) {
+      res.sendFile(path.join(__dirname, '../build', 'index.html'));
+    } else {
+      next();
+    }
   });
 }
 
